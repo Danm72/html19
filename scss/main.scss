@@ -1,0 +1,22 @@
+@import "bootstrap";
+@import "font-awesome";
+
+
+
+// TEMPLATE
+@import "variables";
+@import "mixins";
+
+// Partials
+@import "partials/scaffolding";
+@import "partials/typography";
+
+// Components
+@import "components/image-slider";
+
+// Sections
+@import "sections/header";
+@import "sections/footer";
+
+// Pages
+@import "pages/home";
