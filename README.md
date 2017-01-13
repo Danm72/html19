@@ -1,7 +1,10 @@
+![dependencies](https://david-dm.org/lab19digital/html19.svg)
+![devDependencies](https://david-dm.org/lab19digital/html19.svg?type=dev)
+
 # Requirements
 
-- NodeJS/NPM  
-- Gulp  
+- NodeJS/NPM
+- Gulp
 
 # Setup
 
