@@ -13,6 +13,7 @@
 # Tasks
 
 `gulp sass` - compile sass  
+`gulp less` - compile less (disabled by default)  
 `gulp js` - compile js (es6 supported)  
 `gulp copy-fa-fonts` - copy font-awesome fonts to ./fonts/  
 `gulp build` - run gulp sass & js  

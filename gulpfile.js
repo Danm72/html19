@@ -13,6 +13,8 @@ gulp = require('gulp'),
 plumber = require('gulp-plumber'),
 webpack = require('webpack-stream'),
 sass = require('gulp-sass'),
+less = require('gulp-less'),
+cleanCSS = require('gulp-clean-css'),
 uglify = require('gulp-uglify'),
 autoprefixer = require('gulp-autoprefixer'),
 connect = require('gulp-connect-php'),
@@ -48,12 +50,22 @@ gulp.task('sass', function () {
     .pipe(browserSync.stream());
 });
 
+// LESS
+gulp.task('less', function () {
+  return gulp.src('less/main.less')
+    .pipe(plumber(plumberHandler))
+    .pipe(less())
+    .pipe(autoprefixer({browsers: autoprefixerBrowsers, cascade: false}))
+    .pipe(cleanCSS())
+    .pipe(gulp.dest(dest))
+    .pipe(browserSync.stream());
+});
+
 // JAVASCRIPT
 gulp.task('js', function () {
   return gulp.src('js/main.js')
     .pipe(plumber(plumberHandler))
     .pipe(webpack(webpackConfig))
-    .pipe(uglify())
     .pipe(gulp.dest(dest));
 });
 
@@ -65,6 +77,7 @@ gulp.task('js-watch', ['js'], function (done) {
 
 gulp.task('watch', ['build'], function () {
   gulp.watch('scss/**/*.scss', ['sass']);
+  // gulp.watch('less/**/*.less', ['less']);
   gulp.watch('js/**/*.js', ['js-watch']);
   gulp.watch('**/*.html').on('change', browserSyncReload);
   gulp.watch('**/*.php').on('change', browserSyncReload);

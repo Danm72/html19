@@ -1,0 +1,19 @@
+// Max Width
+.max-width(@width: @body-max-width) {
+  max-width: @width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Grid Gutter
+.grid-gutter(@gutter) {
+  .row {
+    margin-left: -(@gutter / 2);
+    margin-right: -(@gutter / 2);
+  }
+
+  [class*="col-"] {
+    padding-left: (@gutter / 2);
+    padding-right: (@gutter / 2);
+  }
+}
