@@ -1,5 +1,5 @@
-![dependencies](https://david-dm.org/lab19digital/html19.svg)
-![devDependencies](https://david-dm.org/lab19digital/html19.svg?type=dev)
+[![dependencies Status](https://david-dm.org/lab19digital/html19/status.svg)](https://david-dm.org/lab19digital/html19)
+[![devDependencies Status](https://david-dm.org/lab19digital/html19/dev-status.svg)](https://david-dm.org/lab19digital/html19?type=dev)
 
 # Requirements
 

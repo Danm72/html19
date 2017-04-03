@@ -1,26 +1,26 @@
 var
 
 // Settings
-phpPort = 8000,
-browserSyncProxy = 'localhost/Lab19/html19',
-nodePath = './node_modules',
-dest = './dist',
+browserSyncProxy     = 'localhost/Lab19/html19',
+nodePath             = './node_modules',
+dest                 = './dist',
 autoprefixerBrowsers = ['last 2 versions', '> 1%', 'ie 9'],
-webpackConfig = require('./webpack.config.js'),
+webpackConfig        = require('./webpack.config.js'),
 
 // Gulp Modules
-gulp = require('gulp'),
-plumber = require('gulp-plumber'),
-webpack = require('webpack-stream'),
-sass = require('gulp-sass'),
-less = require('gulp-less'),
-cleanCSS = require('gulp-clean-css'),
-uglify = require('gulp-uglify'),
-autoprefixer = require('gulp-autoprefixer'),
-connect = require('gulp-connect-php'),
-notify = require('gulp-notify'),
-browserSync = require('browser-sync').create(),
-browserSyncReload = browserSync.reload;
+gulp                 = require('gulp'),
+plumber              = require('gulp-plumber'),
+webpack              = require('webpack-stream'),
+sass                 = require('gulp-sass'),
+less                 = require('gulp-less'),
+uglify               = require('gulp-uglify'),
+postcss              = require('gulp-postcss'),
+autoprefixer         = require('autoprefixer'),
+cssnano              = require('cssnano'),
+connect              = require('gulp-connect-php'),
+notify               = require('gulp-notify'),
+browserSync          = require('browser-sync').create(),
+browserSyncReload    = browserSync.reload;
 
 
 
@@ -32,6 +32,15 @@ var plumberHandler = {
   })
 };
 
+// PostCSS
+var postcssPlugins = [
+  autoprefixer({
+    browsers: autoprefixerBrowsers,
+    cascade: false
+  }),
+  cssnano()
+];
+
 
 
 // SASS
@@ -39,13 +48,12 @@ gulp.task('sass', function () {
   return gulp.src('scss/**/*.scss')
     .pipe(plumber(plumberHandler))
     .pipe(sass({
-      outputStyle: 'compressed',
       precision: 10,
       includePaths: [
         './node_modules'
       ]
     }))
-    .pipe(autoprefixer({browsers: autoprefixerBrowsers, cascade: false}))
+    .pipe(postcss(postcssPlugins))
     .pipe(gulp.dest(dest))
     .pipe(browserSync.stream());
 });
@@ -55,8 +63,7 @@ gulp.task('less', function () {
   return gulp.src('less/main.less')
     .pipe(plumber(plumberHandler))
     .pipe(less())
-    .pipe(autoprefixer({browsers: autoprefixerBrowsers, cascade: false}))
-    .pipe(cleanCSS())
+    .pipe(postcss(postcssPlugins))
     .pipe(gulp.dest(dest))
     .pipe(browserSync.stream());
 });
@@ -75,7 +82,7 @@ gulp.task('js-watch', ['js'], function (done) {
   done();
 });
 
-gulp.task('watch', ['build'], function () {
+gulp.task('watch', function () {
   gulp.watch('scss/**/*.scss', ['sass']);
   // gulp.watch('less/**/*.less', ['less']);
   gulp.watch('js/**/*.js', ['js-watch']);
@@ -95,7 +102,7 @@ gulp.task('build', ['sass', 'js']);
 // PHP
 gulp.task('php', ['watch'], function () {
   connect.server({
-    port: phpPort,
+    port: 1919,
     open: false,
     hostname: '127.0.0.1',
     base: './',
@@ -105,7 +112,7 @@ gulp.task('php', ['watch'], function () {
       ghostMode: false,
       ui: false,
       notify: false,
-      proxy: '127.0.0.1:' + phpPort
+      proxy: '127.0.0.1:1919'
     });
   });
 });
@@ -120,4 +127,4 @@ gulp.task('browser', ['watch'], function () {
   });
 });
 
-gulp.task('default', ['browser']);
+gulp.task('default', ['php']);
