@@ -1,22 +1,17 @@
-[![dependencies Status](https://david-dm.org/lab19digital/html19/status.svg)](https://david-dm.org/lab19digital/html19)
-[![devDependencies Status](https://david-dm.org/lab19digital/html19/dev-status.svg)](https://david-dm.org/lab19digital/html19?type=dev)
-
-# Requirements
-
-- NodeJS/NPM
-- Gulp
-
 # Setup
+
+`npm install -g gulp` (You can skip this step if you already have gulp installed)
 
 `npm install`
 
-# Tasks
+`gulp`
 
-`gulp sass` - compile sass  
-`gulp less` - compile less (disabled by default)  
-`gulp js` - compile js (es6 supported)  
-`gulp copy-fa-fonts` - copy font-awesome fonts to ./fonts/  
-`gulp build` - run gulp sass & js  
-`gulp watch` - watch for file changes  
-`gulp php` - run a php server, browserSync and watch for changes  
-`gulp browser` - run browserSync and watch for changes (update *browserSyncProxy* option on gulpfile.js)  
+# Available gulp tasks
+
+`gulp js` - compile JS with inline source maps  
+`gulp sass` - compile SCSS with inline source maps  
+`gulp build` - compile production ready JS & SCSS (minified & autoprefixer)  
+`gulp watch` - watch for files changes  
+`gulp php` - (default task) run the server and watch for files changes  
+`gulp proxy` - run BrowserSync without a server, you need to modify `browserSyncProxy` setting  
+`gulp copy-fa-fonts` - copy Font Awesome fonts from node_modules to fonts folder  

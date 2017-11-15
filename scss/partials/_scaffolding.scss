@@ -1,23 +1,17 @@
-// Scaffolding
-// ====================================
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
 html {
-  font-size: $font-size;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  // font-size: 62.5%; // 1rem = 10px
 }
 
 body {
-  font-family: $font-family;
-  font-size: $font-size;
-  font-weight: normal;
-  line-height: $line-height;
-  color: $foreground;
-  background-color: $background;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#main-wrapper {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }

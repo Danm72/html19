@@ -1,19 +1,13 @@
-// Max Width
-@mixin max-width($width: $body-max-width) {
-  max-width: $width;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-// Grid Gutter
-@mixin grid-gutter($gutter) {
+@mixin grid-gutter($width: $spacer) {
   .row {
-    margin-left: -($gutter / 2);
-    margin-right: -($gutter / 2);
-  }
+    margin-left: -($width / 2);
+    margin-right: -($width / 2);
 
-  [class*="col-"] {
-    padding-left: ($gutter / 2);
-    padding-right: ($gutter / 2);
+    & > .col,
+    & > [class^="col-"],
+    & > [class*=" col-"] {
+      padding-left: ($width / 2);
+      padding-right: ($width / 2);
+    }
   }
 }
