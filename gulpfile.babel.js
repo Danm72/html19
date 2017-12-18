@@ -21,14 +21,13 @@ const browserSyncProxy = 'local-url.dev';
 
 const autoprefixerBrowsers = ['last 2 versions', '> 1%', 'ie 10'];
 
-const nodePath = `${__dirname}/node_modules`;
 const basePath = __dirname;
+const nodePath = `${basePath}/node_modules`;
 const dest = `${basePath}/dist`;
-const fontsDest = `${basePath}/fonts`;
 
 
 
-// DEV TASKS -> sass / js / copy-fa-fonts / watch / php / proxy / build
+// DEV TASKS -> sass / js / watch / php / proxy / build
 // =======================================================================
 
 // Plumber
@@ -86,12 +85,6 @@ gulp.task('js:prod', () => {
 gulp.task('js-watch', ['js'], (done) => {
   browserSync.reload();
   done();
-});
-
-// Copy FontAwesome fonts to 'fontsDest'
-gulp.task('copy-fa-fonts', () => {
-  return gulp.src(`${nodePath}/font-awesome/fonts/**/*`)
-    .pipe(gulp.dest(fontsDest));
 });
 
 // Watch
