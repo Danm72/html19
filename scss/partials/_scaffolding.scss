@@ -15,13 +15,3 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-.container {
-  max-width: 1300px;
-}
-
-
-.container-sm {
-  @extend .container;
-  max-width: 1024px;
-}
