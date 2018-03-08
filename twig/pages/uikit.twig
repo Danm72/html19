@@ -1,0 +1,127 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+  {# ------------------------------------------ Hero #}
+  {% include 'components/hero.twig' %}
+
+  <div class="overlay-content">
+
+    <div class="container-sm">
+
+      {% include 'components/approach.twig' %}
+
+      {% include 'components/trending.twig' %}
+
+    </div>
+
+    <div class="article-content">
+
+      <div class="container">
+
+        {% include 'components/article.twig' with {
+
+          title: 'state of the nation&ndash;russia',
+          body_lead: '22 Apr 2018 / 07:45pm',
+          body: 'Sed porttitor lectus nibh. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam id dui posuere blandit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.',
+
+          links: [ { 'title' : 'upcoming event', 'link': '#' }, {'title' : 'see all', 'link' : '#' } ],
+          image: { url: '/img/content/event.jpg' }
+
+        } %}
+
+        {% include 'components/article.twig' with {
+
+          title: 'in it together',
+          body_lead: 'LinkedIn',
+          body: 'Sed porttitor lectus nibh. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam id dui posuere blandit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.',
+
+          links: [{ 'title' : 'featured work', 'link': '#' }, {'title' : 'see all', 'link' : '#' }],
+          image: { url: '/img/content/in-together.jpg' }
+
+        } %}
+
+        {% include 'components/article.twig' with {
+
+          title: 'the three bears',
+          body_lead: 'Rowse',
+          body: 'Sed porttitor lectus nibh. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam id dui posuere blandit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.',
+          image: { url: '/img/content/three-bears.jpg' },
+          reverse: true
+
+        } %}
+
+        {% include 'components/article.twig' with {
+
+          title: 'l\'eau du chris',
+          body_lead: 'CALM X Topman',
+          body: 'Sed porttitor lectus nibh. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam id dui posuere blandit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.',
+          image: { url: '/img/content/leau-chris.jpg' }
+
+        } %}
+
+      </div>
+
+      <div class="container">
+        {% include 'components/testimonials.twig' with {
+          links: [{ title : 'kind words', link: '#'}],
+          quotes : [
+            {
+              quote: 'lorem ipsum dolor sit amet, consectetur adipiscing elit. integer elementum elit in dolor interdu, portra...',
+              cite: {
+                lead: '22 Apr 2018 / Creative Review',
+                body: 'BMB Launch wonderful Three Bears campaign for Rowse Honey'
+              }
+            },
+            {
+              quote: 'lorem ipsum dolor sit amet, consectetur adipiscing elit. integer elementum elit in dolor interdu, portra...',
+              cite: {
+                lead: '22 Apr 2018 / Creative Review',
+                body: 'BMB Launch wonderful Three Bears campaign for Rowse Honey'
+              }
+            },
+            {
+              quote: 'lorem ipsum dolor sit amet, consectetur adipiscing elit. integer elementum elit in dolor interdu, portra...',
+              cite: {
+                lead: '22 Apr 2018 / Creative Review',
+                body: 'BMB Launch wonderful Three Bears campaign for Rowse Honey'
+              }
+            },
+            {
+              quote: 'lorem ipsum dolor sit amet, consectetur adipiscing elit. integer elementum elit in dolor interdu, portra...',
+              cite: {
+                lead: '22 Apr 2018 / Creative Review',
+                body: 'BMB Launch wonderful Three Bears campaign for Rowse Honey'
+              }
+            }
+          ]
+        } %}
+      </div>
+
+      <div class="container">
+        {% include 'components/social.twig' %}
+      </div>
+
+      <div class="container">
+        {% include 'components/about.twig' with {
+          image: { url: '/img/content/bmb.jpg' },
+          artwork: { url: '/img/content/artwork.jpg' },
+        } %}
+      </div>
+
+      <div class="container">
+        {% include 'components/clients.twig' with {} %}
+      </div>
+
+      <div class="container">
+        {% include 'components/location.twig' %}
+      </div>
+
+      {% include 'components/map.twig' %}
+
+    </div>
+
+
+  </div>
+
+{% endblock %}

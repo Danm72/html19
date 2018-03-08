@@ -1,0 +1,26 @@
+.link-nav {
+  font-size: 1.5rem;
+  list-style: none;
+  margin:0; padding:0;
+  display: flex;
+  flex-direction:row;
+  font-family: $headings-font-family;
+  margin-left: -20px;
+  margin-bottom: 20px;
+  > li {
+    margin:0; padding:0;
+    margin: 0 20px;
+    border-bottom: 2px solid $gray-mid;
+    a {
+      color:$gray-mid;
+      text-decoration: none !important;
+    }
+
+    &:first-child {
+      border-bottom: 2px solid $black;
+      a {
+        color:$black;
+      }
+    }
+  }
+}

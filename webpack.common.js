@@ -1,6 +1,6 @@
 var path     = require('path');
 var webpack  = require('webpack');
-var themeUrl = 'wp/wp-content/themes/' + theme;
+// var themeUrl = 'wp/wp-content/themes/' + theme;
 
 module.exports = {
   entry: './js/main.js',

@@ -1,0 +1,32 @@
+<div class="social">
+
+  {% include 'components/link-nav.twig' with {
+    links: [
+      { 'title' : 'social', 'link': '#' }
+    ]
+  } %}
+
+  <div class="instagram scroll-lock" data-scroll-lock data-start="end">
+    <div class="scrollable">
+      {% spaceless %}
+        {# <a data-item href=""><img src="/img/content/instagram-1.jpg" /></a> #}
+        <a data-brand href="//instagram.com" class="social-brand"></a>
+      {% endspaceless %}
+    </div>
+  </div>
+
+  <div class="twitter scroll-lock" data-scroll-lock data-start="start">
+    <div class="scrollable">
+      {% spaceless %}
+        <div data-brand class="social-brand">
+          <a href="//twitter.com"></a>
+        </div>
+        <div data-item></div>
+        <div data-item></div>
+        <div data-item></div>
+      {% endspaceless %}
+    </div>
+
+  </div>
+
+</div>

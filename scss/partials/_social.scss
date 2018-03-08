@@ -1,0 +1,41 @@
+.social {
+  .link-nav {
+    margin-left: $link-nav-padding-left;
+  }
+  .instagram {
+    .social-brand {
+      @extend %icon-instagram;
+    }
+    > .scrollable > a {
+      display: block;
+      margin-right: 2px;
+    }
+    margin-bottom: 1px;
+  }
+  .twitter {
+    .scrollable > div {
+      margin-right: 2px;
+      background: $black;
+      &.social-brand {
+        background: transparent;
+        > a {
+          width: 100%;
+          height: 100%;
+          display: block;
+          @extend %icon-twitter;
+        }
+      }
+    }
+  }
+
+  .scrollable {
+    display: flex;
+    flex-direction:row;
+  }
+}
+
+.scroll-lock {
+  width: 100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+}

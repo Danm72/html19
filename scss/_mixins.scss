@@ -11,3 +11,35 @@
     }
   }
 }
+
+@mixin medium-text(){
+  font-family: $headings-font-family;
+  font-style: normal;
+  font-size: 4.5rem;
+  line-height: 4rem;
+  letter-spacing: -5px;
+}
+
+@mixin small-text(){
+  font-style: normal;
+  font-size: 1.9rem;
+  line-height: 1.9rem;
+  letter-spacing: -2px;
+}
+
+@mixin dynamic-text($size){
+  font-style: normal;
+  font-size: $size + rem;
+  line-height: $size + rem;
+  letter-spacing: $size / 12.5 * -1 + rem;
+}
+
+
+@mixin zero-spacing(){
+  padding:0; margin:0;
+}
+
+@mixin reset-ul(){
+  list-style: none;
+  @include zero-spacing;
+}

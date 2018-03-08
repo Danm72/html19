@@ -1,0 +1,18 @@
+<div class="testimonials">
+
+  {% include 'components/link-nav.twig' with { links: links } %}
+
+  <div class="slider slider-testimonials">
+    {% for each in quotes %}
+      <div>
+        <blockquote>
+          <span>{{ each.quote }}</span>
+          <footer>
+            <cite><strong>{{ each.cite.lead }} / </strong>{{ each.cite.body }}</cite>
+          </footer>
+        </blockquote>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>

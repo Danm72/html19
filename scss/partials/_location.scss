@@ -1,0 +1,76 @@
+.location {
+  padding:150px 0 0;
+  margin-left: $container-padding-left;
+  .content-heading {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.google-map {
+  min-height: 90vh;
+  width: 100%;
+  margin-top: -30px;
+}
+
+.google-map-wrapper {
+  transform:translateY(50px);
+  transition:all 1s;
+  &.in {
+    transform:translateY(0);
+  }
+}
+
+.map-clock {
+  position: relative;
+  .clock {
+    top: -70px;
+    right: $container-padding-left;
+    bottom: auto;
+    left: auto;
+  }
+}
+
+.bmb-maps-marker {
+  width: 200px;
+  height: 200px;
+  margin-left: -100px;
+  margin-top: -200px;
+  // opacity:0.5;
+  position: relative;
+  background: transparent;
+  background-image:url('#{$img-path}/hero-logo-3.png');
+  background-size:200px auto;
+  background-repeat: no-repeat;
+  &::after {
+    content:'';
+    animation: zoomIn 3s infinite;
+    background: rgba(#fff, 1);
+    border-radius:100%;
+    display: inline-block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    bottom:-15px;
+    left:50%;
+    margin-left: -20px;
+    padding: 10px;
+    box-shadow:0 0 0 20px rgba(#ddd, 0.5);
+    border:10px solid rgba(#ddd, 0.75);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(.4, .4, .4);
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

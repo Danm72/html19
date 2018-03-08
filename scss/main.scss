@@ -7,6 +7,10 @@
 @import "bootstrap/scss/mixins";
 @import "mixins";
 
+@import "fonts";
+@import "type";
+@import "icons";
+
 
 // FONT AWESOME
 // @import "font-awesome/scss/variables";
@@ -27,7 +31,7 @@
 // BOOTSTRAP
 // @import "bootstrap/scss/print";
 @import "bootstrap/scss/reboot";
-// @import "bootstrap/scss/type";
+@import "bootstrap/scss/type";
 // @import "bootstrap/scss/images";
 // @import "bootstrap/scss/code";
 @import "bootstrap/scss/grid";
@@ -59,11 +63,28 @@
 
 
 // VENDOR
-// @import 'vendor/slick';
+@import 'vendor/slick';
 
 
 // PARTIALS
 @import "partials/scaffolding";
+@import "partials/navigation";
+@import "partials/hero";
+@import "partials/overlay-content";
+@import "partials/approach";
+@import "partials/trending";
+@import "partials/clock";
+@import "partials/figure";
+@import "partials/article";
+@import "partials/link-nav";
+@import "partials/testimonials";
+@import "partials/social";
+@import "partials/content-heading";
+@import "partials/about";
+@import "partials/clients";
+@import "partials/location";
+@import "partials/footer";
+@import "partials/progress";
 
 
 // PAGES

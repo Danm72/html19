@@ -1,0 +1,115 @@
+.hero {
+
+  &-media {
+    position: fixed;
+    top:0; left:0;
+    width: 100%;
+    height: 100vh;
+    color:red;
+    z-index: -1;
+    figure {
+      min-height: 100vh;
+    }
+  }
+
+  &-logo,
+  &-strapline {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    flex:1 1;
+    figure {
+      height:75vh;
+      img {
+        height: 100%;
+      }
+    }
+  }
+
+  &-strapline {
+    height: 200px;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    align-items:flex-start;
+    figure {
+      width: auto;
+      height: 100vh;
+      min-height: 0;
+      position: relative;
+      img {
+        height: 100%;
+      }
+
+      &::after {
+        height: 100vh;
+        content:'';
+        background:$gray-light;
+        width: 100%;
+        right: -100%;
+        position: absolute;
+        top:0;
+      }
+    }
+  }
+
+  // Fill the space
+  .hero-fixed & {
+    padding-bottom: 100vh;
+    .hero-strapline {
+      position: fixed;
+      bottom:0;
+      left:0;
+      width: 100%;
+      transition: all 0.5s;
+      // &::before {
+      //   transition: all 0.5s;
+      //   content:'';
+      //   position: fixed;
+      //   height: 100vh;
+      //   background-color: $gray-light;
+      //   width: 100%;
+      //   bottom:-100vh;
+      //   left:0;
+      // }
+    }
+  }
+
+  .hero-fixed.hero-fixed-last & {
+    .hero-strapline {
+      position: absolute;
+      top:200vh;
+      &::before {
+        bottom:0;
+      }
+    }
+    .hero-fill {
+      position: absolute;
+      top:300vh;
+      height: 200vh;
+      background-color: $gray-light;
+      width: 100%;
+      z-index: 1;
+    }
+  }
+
+}
+
+.hero-content {
+  position: relative;
+}
+
+.hero-overlay-content {
+  position: relative;
+  z-index: 1;
+}
+
+
+.after-hero {
+  // min-height: 100vh;
+  // height: 100vh;
+  // background:#f2f2f2;
+}

@@ -1,0 +1,39 @@
+<div class="trending">
+
+  {% set hashtags = [
+    {'#BAFTAS'              : '12000'},
+    {'#boxing'              : '12000'},
+    {'#Rdguk'               : '12000'},
+    {'#BlackPanther'        : '12000'},
+    {'#London'              : '12000'},
+    {'#AlexanderKrushelnitsky' : '12000'},
+    {'#WayneBennet'         : '12000'},
+    {'#TimesUpToBritain'    : '12000'},
+  ] %}
+
+  <div class="row">
+    <div class="col-sm-7 col-xs-12 hashtags">
+      <div>
+        {% include 'components/link-nav.twig' with {
+          links: [
+            { 'title' : 'what people are talking about now', 'link': '#' }
+          ]
+        } %}
+      </div>
+      <ul data-trends>
+        {# {% for each in hashtags %}
+          <li>
+            {% for tag, count in each %}
+              <a href="#">{{ tag }}</a><span>{{ count }}</span>
+            {% endfor %}
+          </li>
+        {% endfor %} #}
+      </ul>
+    </div>
+    <div class="col-sm-5 col-xs-12">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="twitter-image" data-twitter-image />
+      {% include 'components/clock.twig' with { clock :'machine' } %}
+    </div>
+  </div>
+
+</div>

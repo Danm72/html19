@@ -1,0 +1,20 @@
+.progress {
+  width: 33%;
+  height: 3px;
+  display: none;
+}
+
+.progress-wrap {
+  display: none;
+  background: rgba(#fff, 0.5);
+  margin: 20px 0;
+  overflow: hidden;
+  position: relative;
+  .progress-bar {
+    background: rgba(#fff, 1);
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+

@@ -1,0 +1,61 @@
+.about {
+  padding:150px 0;
+  margin-left: $container-padding-left;
+
+  .spotify-widget {
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    height: 100%;
+    padding-right: 50px;
+    transform:translateY(150px);
+    transition: all 1s;
+    margin-top: -20px;
+    .spotify-now-playing {
+      font-family: $headings-font-family;
+      font-size: 1.2rem;
+      letter-spacing: -1px;
+      margin: 20px 0;
+    }
+    .spotify-title {
+      @include small-text;
+    }
+    .spotify-icon {
+      @extend %icon-spotify;
+      display: inline-block;
+      width: 82px;
+      height: 82px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .content-heading {
+    z-index: 1;
+    position: relative;
+  }
+
+  .artwork {
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top:-150px;
+    width: 300px;
+    height: 300px;
+    margin-left: -150px;
+  }
+
+  .artwork-wrapper {
+    margin-top: -30px;
+    position: relative;
+    transform:translateY(200px);
+    transition: all 1s;
+  }
+
+  &.in {
+    .artwork-wrapper,
+    .spotify-widget {
+      transform:translateY(0);
+    }
+  }
+
+}
