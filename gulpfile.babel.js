@@ -8,6 +8,7 @@ import sass              from 'gulp-sass';
 import postcss           from 'gulp-postcss';
 import autoprefixer      from 'autoprefixer';
 import sourcemaps        from 'gulp-sourcemaps';
+import watch             from 'gulp-watch';
 import webpack           from 'webpack-stream';
 import webpackConfigDEV  from './webpack.dev';
 import webpackConfigPROD from './webpack.prod';
