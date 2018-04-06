@@ -1,6 +1,5 @@
-var path     = require('path');
-var webpack  = require('webpack');
-var themeUrl = 'wp/wp-content/themes/' + theme;
+var path    = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: './js/main.js',
@@ -15,10 +14,7 @@ module.exports = {
         exclude: [
           /(node_modules|bower_components)/
         ],
-        loader: 'babel-loader',
-        options: {
-          presets: ['es2015']
-        }
+        loader: 'babel-loader'
       }, {
         test: require.resolve('jquery'),
         loader: 'expose-loader?jQuery!expose-loader?$'

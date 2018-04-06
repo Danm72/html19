@@ -5,7 +5,8 @@ import connectPHP        from 'gulp-connect-php';
 import plumber           from 'gulp-plumber';
 import notify            from 'gulp-notify';
 import sass              from 'gulp-sass';
-import autoprefixer      from 'gulp-autoprefixer';
+import postcss           from 'gulp-postcss';
+import autoprefixer      from 'autoprefixer';
 import sourcemaps        from 'gulp-sourcemaps';
 import webpack           from 'webpack-stream';
 import webpackConfigDEV  from './webpack.dev';
@@ -60,10 +61,12 @@ gulp.task('sass:prod', () => {
       outputStyle: 'compressed',
       includePaths: [nodePath]
     }))
-    .pipe(autoprefixer({
-      browsers: autoprefixerBrowsers,
-      cascade: false
-    }))
+    .pipe(postcss([
+      autoprefixer({
+        browsers: autoprefixerBrowsers,
+        cascade: false
+      })
+    ]))
     .pipe(gulp.dest(dest));
 });
 
@@ -89,10 +92,10 @@ gulp.task('js-watch', ['js'], (done) => {
 
 // Watch
 gulp.task('watch', () => {
-  gulp.watch(`${basePath}/scss/**/*.scss`, ['sass']);
-  gulp.watch(`${basePath}/js/**/*.js`, ['js-watch']);
-  gulp.watch(`${basePath}/**/*.html`).on('change', browserSyncReload);
-  gulp.watch(`${basePath}/**/*.php`).on('change', browserSyncReload);
+  watch(`${basePath}/scss/**/*.scss`, () => gulp.start('sass'));
+  watch(`${basePath}/js/**/*.js`, () => gulp.start('js-watch'));
+  watch(`${basePath}/**/*.twig`, () => browserSync.reload());
+  watch(`${basePath}/**/*.php`, () => browserSync.reload());
 });
 
 // PHP

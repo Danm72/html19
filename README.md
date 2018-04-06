@@ -1,8 +1,8 @@
 # Setup
 
-`npm install -g gulp` (You can skip this step if you already have gulp installed)
+`npm install -g gulp` or `yarn global add gulp` (You can skip this step if you already have gulp installed)
 
-`npm install`
+`npm install` or `yarn`
 
 `gulp`
 

@@ -9,6 +9,7 @@
 *.esproj
 *.sublime-project
 *.sublime-workspace
+*.code-workspace
 nbproject
 Thumbs.db
 
@@ -22,6 +23,7 @@ Thumbs.db
 *.swp
 *.vi
 *.zip
+*.map
 *~
 
 bower_components
