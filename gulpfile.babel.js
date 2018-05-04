@@ -19,9 +19,7 @@ import { create as browserSyncCreate } from 'browser-sync';
 // Settings
 const browserSync = browserSyncCreate();
 const browserSyncReload = browserSync.reload;
-const browserSyncProxy = 'local-url.dev';
-
-const autoprefixerBrowsers = ['last 2 versions', '> 1%', 'ie 10'];
+const browserSyncProxy = 'local-url.test';
 
 const basePath = __dirname;
 const nodePath = `${basePath}/node_modules`;
@@ -63,10 +61,7 @@ gulp.task('sass:prod', () => {
       includePaths: [nodePath]
     }))
     .pipe(postcss([
-      autoprefixer({
-        browsers: autoprefixerBrowsers,
-        cascade: false
-      })
+      autoprefixer({ cascade: false })
     ]))
     .pipe(gulp.dest(dest));
 });
