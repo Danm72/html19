@@ -18,11 +18,10 @@ import { create as browserSyncCreate } from 'browser-sync';
 
 // Settings
 const browserSync = browserSyncCreate();
-const browserSyncReload = browserSync.reload;
 const browserSyncProxy = 'local-url.test';
 
 const basePath = __dirname;
-const nodePath = `${basePath}/node_modules`;
+const nodePath = path.resolve(__dirname, 'node_modules');
 const dest = `${basePath}/dist`;
 
 
@@ -90,7 +89,7 @@ gulp.task('js-watch', ['js'], (done) => {
 gulp.task('watch', () => {
   watch(`${basePath}/scss/**/*.scss`, () => gulp.start('sass'));
   watch(`${basePath}/js/**/*.js`, () => gulp.start('js-watch'));
-  watch(`${basePath}/**/*.twig`, () => browserSync.reload());
+  watch(`${basePath}/**/*.html`, () => browserSync.reload());
   watch(`${basePath}/**/*.php`, () => browserSync.reload());
 });
 

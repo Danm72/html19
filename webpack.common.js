@@ -1,19 +1,16 @@
-var path    = require('path');
-var webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-  entry: './js/main.js',
+  entry: `./js/main.js`,
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, `/dist`),
     filename: '[name].js'
   },
   module: {
     rules: [
       {
         test: /\.js?$/,
-        exclude: [
-          /(node_modules|bower_components)/
-        ],
+        exclude:  ['node_modules'],
         loader: 'babel-loader'
       }, {
         test: require.resolve('jquery'),
@@ -22,10 +19,7 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: [
-      'node_modules'
-    ],
+    modules: ['node_modules'],
     extensions: ['.js', '.json', '.jsx']
-  },
-  target: 'web'
+  }
 }

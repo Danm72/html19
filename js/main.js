@@ -20,12 +20,12 @@ const Site = {};
 
 $(document).ready(() => {
   Site.vars = {
-    window: $(window),
+    window:   $(window),
     document: $(document),
-    body: $('body'),
+    body:     $('body'),
     htmlBody: $('html, body'),
-    header: $('#header'),
-    footer: $('#footer')
+    header:   $('#header'),
+    footer:   $('#footer')
   };
 
   const s = Site.vars;
