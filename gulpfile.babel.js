@@ -9,7 +9,8 @@ import postcss           from 'gulp-postcss';
 import autoprefixer      from 'autoprefixer';
 import sourcemaps        from 'gulp-sourcemaps';
 import watch             from 'gulp-watch';
-import webpack           from 'webpack-stream';
+import webpack           from 'webpack';
+import webpackStream     from 'webpack-stream';
 import webpackConfigDEV  from './webpack.dev';
 import webpackConfigPROD from './webpack.prod';
 import { create as browserSyncCreate } from 'browser-sync';
@@ -69,14 +70,14 @@ gulp.task('sass:prod', () => {
 gulp.task('js', () => {
   return gulp.src(`${basePath}/js/main.js`)
     .pipe(plumber(plumberHandler))
-    .pipe(webpack(webpackConfigDEV))
+    .pipe(webpackStream(webpackConfigDEV, webpack))
     .pipe(gulp.dest(dest));
 });
 
 gulp.task('js:prod', () => {
   return gulp.src(`${basePath}/js/main.js`)
     .pipe(plumber(plumberHandler))
-    .pipe(webpack(webpackConfigPROD))
+    .pipe(webpackStream(webpackConfigPROD, webpack))
     .pipe(gulp.dest(dest));
 });
 
