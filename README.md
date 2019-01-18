@@ -9,8 +9,8 @@
 # Available gulp tasks
 
 `gulp js` - compile JS with inline source maps  
-`gulp sass` - compile SCSS with inline source maps  
+`gulp scss` - compile SCSS with inline source maps  
 `gulp build` - compile production ready JS & CSS (minified & autoprefixer)  
 `gulp watch` - watch for files changes  
-`gulp php` - (default task) run the server and watch for files changes  
 `gulp proxy` - run BrowserSync without a server, you need to modify `browserSyncProxy` setting  
+`gulp php` - (default task) run the server and watch for files changes  

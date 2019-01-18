@@ -27,5 +27,4 @@ Thumbs.db
 *.map
 *~
 
-bower_components
 node_modules

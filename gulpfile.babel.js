@@ -1,6 +1,5 @@
 // Dependencies
-import path              from 'path';
-import gulp              from 'gulp';
+import { series, parallel, watch, src, dest } from 'gulp';
 import connectPHP        from 'gulp-connect-php';
 import plumber           from 'gulp-plumber';
 import notify            from 'gulp-notify';
@@ -8,7 +7,6 @@ import sass              from 'gulp-sass';
 import postcss           from 'gulp-postcss';
 import autoprefixer      from 'autoprefixer';
 import sourcemaps        from 'gulp-sourcemaps';
-import watch             from 'gulp-watch';
 import webpack           from 'webpack';
 import webpackStream     from 'webpack-stream';
 import webpackConfigDEV  from './webpack.dev';
@@ -22,25 +20,31 @@ const browserSync = browserSyncCreate();
 const browserSyncProxy = 'local-url.test';
 
 const basePath = __dirname;
-const nodePath = path.resolve(__dirname, 'node_modules');
-const dest = `${basePath}/dist`;
+const nodePath = `${__dirname}/node_modules`;
+const destPath = `${basePath}/dist`;
 
 
 
-// DEV TASKS -> sass / js / watch / php / proxy / build
+// TASKS
 // =======================================================================
 
 // Plumber
-var plumberHandler = {
+const plumberHandler = {
   errorHandler: notify.onError({
     title: 'Gulp Error',
     message: '<%= error.message %>'
   })
 };
 
-// SASS
-gulp.task('sass', () => {
-  return gulp.src(`${basePath}/scss/**/*.scss`)
+// Reload
+function reload(done) {
+  browserSync.reload();
+  done();
+}
+
+// SCSS
+function scss() {
+  return src(`${basePath}/scss/**/*.scss`)
     .pipe(plumber(plumberHandler))
     .pipe(sourcemaps.init())
     .pipe(sass({
@@ -48,12 +52,12 @@ gulp.task('sass', () => {
       includePaths: [nodePath]
     }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(dest))
+    .pipe(dest(destPath))
     .pipe(browserSync.stream());
-});
+}
 
-gulp.task('sass:prod', () => {
-  return gulp.src(`${basePath}/scss/**/*.scss`)
+function scss_prod() {
+  return src(`${basePath}/scss/**/*.scss`)
     .pipe(plumber(plumberHandler))
     .pipe(sass({
       precision: 10,
@@ -63,39 +67,35 @@ gulp.task('sass:prod', () => {
     .pipe(postcss([
       autoprefixer({ cascade: false })
     ]))
-    .pipe(gulp.dest(dest));
-});
+    .pipe(dest(destPath));
+}
 
 // JS
-gulp.task('js', () => {
-  return gulp.src(`${basePath}/js/main.js`)
+function js() {
+  return src(`${basePath}/js/main.js`)
     .pipe(plumber(plumberHandler))
     .pipe(webpackStream(webpackConfigDEV, webpack))
-    .pipe(gulp.dest(dest));
-});
+    .pipe(dest(destPath));
+}
 
-gulp.task('js:prod', () => {
-  return gulp.src(`${basePath}/js/main.js`)
+function js_prod() {
+  return src(`${basePath}/js/main.js`)
     .pipe(plumber(plumberHandler))
     .pipe(webpackStream(webpackConfigPROD, webpack))
-    .pipe(gulp.dest(dest));
-});
-
-gulp.task('js-watch', ['js'], (done) => {
-  browserSync.reload();
-  done();
-});
+    .pipe(dest(destPath));
+}
 
 // Watch
-gulp.task('watch', () => {
-  watch(`${basePath}/scss/**/*.scss`, () => gulp.start('sass'));
-  watch(`${basePath}/js/**/*.js`, () => gulp.start('js-watch'));
-  watch(`${basePath}/**/*.html`, () => browserSync.reload());
-  watch(`${basePath}/**/*.php`, () => browserSync.reload());
-});
+function watch_files() {
+  watch(`${basePath}/scss/**/*.scss`, scss);
+  watch(`${basePath}/js/**/*.js`, series(js, reload));
+  watch(`${basePath}/**/*.twig`, reload);
+  watch(`${basePath}/**/*.php`, reload);
+  watch(`${basePath}/**/*.html`, reload);
+}
 
 // PHP
-gulp.task('php', ['watch'], () => {
+function php() {
   connectPHP.server({
     port: 8000,
     open: false,
@@ -110,20 +110,28 @@ gulp.task('php', ['watch'], () => {
       proxy: '127.0.0.1:8000'
     });
   });
-});
+}
 
 // Proxy
-gulp.task('proxy', ['watch'], () => {
+function proxy() {
   browserSync.init({
     ghostMode: false,
     ui: false,
     notify: false,
     proxy: browserSyncProxy
   });
-});
+}
 
-// Build
-gulp.task('build', ['sass:prod', 'js:prod']);
+const proxy = parallel(proxy, watch_files);
+const build = parallel(scss_prod, js_prod);
 
-// Default
-gulp.task('default', ['php']);
+export {
+  scss,
+  scss_prod,
+  js,
+  js_prod,
+  proxy,
+  build
+};
+
+export default parallel(php, watch_files);
