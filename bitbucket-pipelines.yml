@@ -1,37 +1,34 @@
 definitions:
   script: &ssh_prepare mkdir -p ~/.ssh && echo $KNOWNHOSTS > ~/.ssh/known_hosts && (umask  077 ; echo $LAB19_STAGE_KEY_B64 | base64 --decode > ~/.ssh/id_rsa)
+  steps: &steps
+    - step:
+        name: Deploy using git
+        script:
+          - *ssh_prepare
+          - >
+              ssh lab19@$LAB19_STAGE_IP "mkdir -p /var/www/$BITBUCKET_BRANCH-$BITBUCKET_REPO_SLUG/ &&
+              cd /var/www/$BITBUCKET_BRANCH-$BITBUCKET_REPO_SLUG/ &&
+              git init . &&
+              git pull $BITBUCKET_GIT_SSH_ORIGIN $BITBUCKET_BRANCH &&
+              echo \"<?php define('BUILD_VERSION', '$BITBUCKET_BRANCH-$BITBUCKET_COMMIT'); ?>\" > build-version.php"
+    - step:
+        name: Yarn install
+        image: node:10.15.0
+        script:
+          - yarn install
+          - yarn run build
+        caches:
+          - node
+        artifacts:
+          - dist/**
+
+    - step:
+        name: Deploy artifacts
+        script:
+          - *ssh_prepare
+          - scp -r dist lab19@$LAB19_STAGE_IP:/var/www/$BITBUCKET_BRANCH-$BITBUCKET_REPO_SLUG
 
 pipelines:
   branches:
-    '{master, develop}':
-      - step:
-          name: Yarn install
-          image: node:10.15.0
-          script:
-            - yarn install
-            - yarn run build
-          caches:
-            - node
-          artifacts:
-            - dist/**
-      - step:
-          name: Deploy using git
-          script:
-            - *ssh_prepare
-            - >
-                ssh lab19@167.99.82.204 "mkdir -p /var/www/$BITBUCKET_BRANCH-$BITBUCKET_REPO_SLUG/ &&
-                cd /var/www/$BITBUCKET_BRANCH-$BITBUCKET_REPO_SLUG/ &&
-                git init . &&
-                git pull $BITBUCKET_GIT_SSH_ORIGIN $BITBUCKET_BRANCH &&
-                echo \"<?php define('BUILD_VERSION', '$BITBUCKET_BRANCH-$BITBUCKET_COMMIT'); ?>\" > build-version.php"
-      - step:
-          name: Composer install
-          script:
-            - *ssh_prepare
-            - ssh lab19@167.99.82.204 "[ -f /var/www/$BITBUCKET_BRANCH-$BITBUCKET_REPO_SLUG/composer.json ] && cd /var/www/$BITBUCKET_BRANCH-$BITBUCKET_REPO_SLUG && composer install || echo 'No composer.json file found'"
-
-      - step:
-          name: Deploy artifacts
-          script:
-            - *ssh_prepare
-            - scp -r dist lab19@167.99.82.204:/var/www/$BITBUCKET_BRANCH-$BITBUCKET_REPO_SLUG
+    master: *steps
+    develop: *steps
